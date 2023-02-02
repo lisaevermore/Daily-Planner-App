@@ -13,31 +13,18 @@ $("#currentDay").text(moment().format("dddd, MMMM Do"));
 //   currentDisplayEl.text(toDay);
 // }
 
-let hours = [
-    ["9AM", moment()],
-    ["10AM", moment()],
-    ["11AM", moment()],
-    ["12PM", moment()],
-    ["1PM", moment()],
-    ["2PM", moment()],
-    ["3PM", moment()],
-    ["4PM", moment()],
-    ["5PM", moment()],
-];
+
 
 var currentTime;
-for (let i = 0; i < hours.length; i++) {
-    const [time, hour] = hours[i];
-    var schedulTime = hours[i][0];
-    $(".time-block") .append(
-            `<div class="row my-row">
-            <div class="col col-1 hour">${time}</div>
-                <input class="col-10 description textarea past type="text" id="content ">
-                <button class = "saveBtn"> save </button>
-            </div>`
-        );
-
+for (let i = 9; i < 19; i++) {
+    let momentHour = moment().hours()
+    let rowDiv = $("<div>").addClass("row my row")
+    let hourDiv = $("<div>").addClass("col-1 hour")
+    let textarea = $("<textarea>").addClass("col-10 description ")
+    let button = $("<button>").addClass("saveBtn").text("save")
+    $(".container").append(rowDiv.append(hourDiv, textarea, button))
 };
+
 
 saveButtonEl.on("click", function (event) {
     event.preventDefault();
