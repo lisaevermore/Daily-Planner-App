@@ -41,6 +41,7 @@ for (let i = 9; i < 19; i++) {
     let hourDiv = $("<div>").addClass("col-1 hour").text(hourDisplay)
     let textarea = $("<textarea>").addClass("col-10 description " + colourKey).val(localStorage.getItem(i))
     let button = $("<button>").addClass("saveBtn").text("save").attr("id", i)
+    // saving and geting value from local storage
     .click(function(){
         var hourKey = $(this).attr("id")
         var value = $(this).siblings(".description").val()
@@ -50,7 +51,7 @@ for (let i = 9; i < 19; i++) {
 
 };
 
-
+//when a button is click the message use show up for 3 sce.
 $('.saveBtn').on("click", function(){
     document.getElementById('saved').innerHTML = "Appintment Added to localStorage ✔️";
 
