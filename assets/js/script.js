@@ -1,7 +1,5 @@
 // save reference to important DOM elements
 var currentDisplayEl = $('#currentDay');
-var saveButtonEl = $('.saveBtn');
-let currentHour = moment().format('hA');
 var savedTextDisplayEl = document.getElementById('.saved');
 
 //var currentHour = Date.now().getHours(); //get current time hour
@@ -18,47 +16,50 @@ $("#currentDay").text(moment().format("dddd, MMMM Do"));
 var currentTime;
 for (let i = 9; i < 19; i++) {
     let momentHour = moment().hours()
-    let rowDiv = $("<div>").addClass("row my row")
-    let hourDiv = $("<div>").addClass("col-1 hour")
-    let textarea = $("<textarea>").addClass("col-10 description ")
-    let button = $("<button>").addClass("saveBtn").text("save")
+    //console.log(momentHour)
+
+    // color-code each timeblock based on past, present, and future when the timeblock is viewed.
+    let colourKey = "";
+    if( momentHour < i){
+        colourKey = "future"
+    } else if (momentHour === i ){
+        colourKey = "present"
+    } else {
+        colourKey = "past"
+    }
+    // add AM or PM text to the time displayed
+    let hourDisplay = ""
+    if(i < 12){
+        hourDisplay = i + " AM"
+    } else if(i === 12){
+        hourDisplay = i + " PM"
+    } else {
+        hourDisplay = i - 12 + " PM"
+    }
+
+    let rowDiv = $("<div>").addClass("row my-row")
+    let hourDiv = $("<div>").addClass("col-1 hour").text(hourDisplay)
+    let textarea = $("<textarea>").addClass("col-10 description " + colourKey).val(localStorage.getItem(i))
+    let button = $("<button>").addClass("saveBtn").text("save").attr("id", i)
+    .click(function(){
+        var hourKey = $(this).attr("id")
+        var value = $(this).siblings(".description").val()
+        localStorage.setItem(hourKey, value)
+    })
     $(".container").append(rowDiv.append(hourDiv, textarea, button))
+
 };
 
 
-saveButtonEl.on("click", function (event) {
-    event.preventDefault();
-    //console.log("moew");
+$('.saveBtn').on("click", function(){
+    document.getElementById('saved').innerHTML = "Appintment Added to localStorage ✔️";
 
+    setTimeout(function(){
+        document.getElementById("saved").innerHTML = '';
+    }, 3000);
+})
   
-    var timeLeft = 5;
-    clearInterval(savedTextDisplayEl)
-    var timeInterval = setInterval(function () {
-        savedTextDisplayEl.textContent = "Appintment Added to localStorage ✔️"
-        timeLeft--;
-        if(timeLeft === 0){
-          clearInterval(savedTextDisplayEl)
-        }
-      }, 1000);
-    
-  });
-  var inputs = document.getElementsByTagName('textarea').value;
-     console.log(inputs);
-    //let list = localStorage.setItem("list", JSON.stringify(input));
-    let list = JSON.parse(localStorage.getItem('list' (input)));
-    
-
-    if (list === null) {
-        list = [];
-        list.push(inputs);
-        localStorage.setItem('list', JSON.stringify(list));
-    } else {
-        list.push(inputs);
-        localStorage.setItem('list', JSON.stringify(list));
-    }
-
  
 
 
   //console.log(hours);
-  console.log(currentHour)
