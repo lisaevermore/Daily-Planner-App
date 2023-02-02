@@ -55,6 +55,20 @@ saveButtonEl.on("click", function (event) {
       }, 1000);
     
   });
+  var inputs = document.getElementsByTagName('textarea').value;
+     console.log(inputs);
+    //let list = localStorage.setItem("list", JSON.stringify(input));
+    let list = JSON.parse(localStorage.getItem('list' (input)));
+    
+
+    if (list === null) {
+        list = [];
+        list.push(inputs);
+        localStorage.setItem('list', JSON.stringify(list));
+    } else {
+        list.push(inputs);
+        localStorage.setItem('list', JSON.stringify(list));
+    }
 
  
 
