@@ -1,6 +1,7 @@
 # Daily-Planner-App
 
 This is a simple calendar application that allows the user to save events for each hour of the day. It uses the Moment.js library for working with date and time and jQuery for dynamic updates to HTML and CSS.
+link to the planner: https://lisaevermore.github.io/Daily-Planner-App/
 
 ## User Story
 
