@@ -38,3 +38,26 @@ for (let i = 0; i < hours.length; i++) {
         );
 
 };
+
+saveButtonEl.on("click", function (event) {
+    event.preventDefault();
+    //console.log("moew");
+
+  
+    var timeLeft = 5;
+    clearInterval(savedTextDisplayEl)
+    var timeInterval = setInterval(function () {
+        savedTextDisplayEl.textContent = "Appintment Added to localStorage ✔️"
+        timeLeft--;
+        if(timeLeft === 0){
+          clearInterval(savedTextDisplayEl)
+        }
+      }, 1000);
+    
+  });
+
+ 
+
+
+  //console.log(hours);
+  console.log(currentHour)
